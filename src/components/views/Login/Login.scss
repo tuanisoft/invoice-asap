@@ -1,0 +1,17 @@
+.Login {
+    display        : flex;
+    flex-flow      : row nowrap;
+    align-items    : center;
+    align-content  : center;
+    justify-content: center;
+    height         : 100%;
+
+    .loginPane {
+        width        : 100%;
+        max-width    : 450px;
+        border-radius: 10px;
+        border       : 1px solid #ccc;
+        text-align   : center;
+        padding      : 20px;
+    }
+}
