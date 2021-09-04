@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: yarn install
-      - run: echo ${{secrets.CONFIG_FILE}} > config.ts
+      - run: echo '${{secrets.CONFIG_FILE}}' >> ./src/config.ts
       - run: yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

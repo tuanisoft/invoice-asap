@@ -1,3 +1,6 @@
+/*
+* PLEASE USE " to all strings
+*/
 const firebaseConfig = {
     apiKey: "",
     authDomain: "invoice-asap.firebaseapp.com",
