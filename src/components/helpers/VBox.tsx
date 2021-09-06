@@ -1,0 +1,20 @@
+import React from 'react';
+import { Pane, PaneProps } from 'evergreen-ui';
+
+const VBox: React.FC<PaneProps> = (props) => {
+    const { children } = props;
+    return (
+        <Pane
+            display="flex"
+            flexDirection="column"
+            flexWrap="nowrap"
+            alignItems="center"
+            justifyContent="center"
+            {...props}
+        >
+            {children}
+        </Pane>
+    );
+};
+
+export default VBox;

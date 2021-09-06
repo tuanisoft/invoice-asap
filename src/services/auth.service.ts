@@ -14,9 +14,10 @@ export const AuthService = {
         return locaUser !== null;
     },
     Logout() {
-        getAuth().signOut();
-        localStorage.clear();
-        window.location.reload();
+        getAuth().signOut().then(() => {
+            localStorage.clear();
+            window.location.reload();
+        });
     },
     LoginWithGoogle() {
         const provider = new GoogleAuthProvider();

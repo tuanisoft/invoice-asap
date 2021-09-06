@@ -1,14 +1,18 @@
-import { Button } from 'evergreen-ui';
+import { Pane } from 'evergreen-ui';
 import React from 'react';
-import { AuthService } from '../../../services/auth.service';
+import Toolbar from './Toolbar';
 import './Layout1.scss';
 
 const Layout1: React.FC = ({ children }) => {
   return (
     <div className="Layout1">
-      <Button onClick={() => AuthService.Logout()}>Logout</Button>
+      <Toolbar />
 
-      {children}
+      <Pane display="flex" flexFlow="row nowrap" justifyContent="center" paddingX={10}>
+        <Pane width="100%" maxWidth={1024}>
+          {children}
+        </Pane>
+      </Pane>
     </div>
   )
 };

@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import { AuthService } from "../../services/auth.service";
 import Dashboard from "../views/Dashboard/Dashboard";
 import Login from "../views/Login/Login";
+import Profile from "../views/Profile/Profile";
 
 const Routes: React.FC = () => {
     const isLogged = AuthService.IsLoggedIn();
@@ -10,8 +11,9 @@ const Routes: React.FC = () => {
     if (isLogged) {
         return (
             <Switch>
-                <Route exact path="/home" component={Dashboard} />
-                <Redirect to="/home" from="*" />
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/profile" component={Profile} />
+                <Redirect to="/dashboard" from="*" />
             </Switch>
         );
     }
