@@ -1,6 +1,7 @@
 import {
     getAuth,
     GoogleAuthProvider,
+    FacebookAuthProvider,
     OAuthProvider,
     signInWithPopup,
     UserCredential
@@ -23,7 +24,7 @@ export const AuthService = {
         const provider = new GoogleAuthProvider();
         provider.setCustomParameters({
             prompt: 'select_account',
-            title: 'Hermes 7 Track'
+            title: 'Invoice ASAP'
         });
 
         const auth = getAuth();
@@ -37,7 +38,21 @@ export const AuthService = {
         const provider = new OAuthProvider('microsoft.com');
         provider.setCustomParameters({
             prompt: 'select_account',
-            title: 'Hermes 7 Track'
+            title: 'Invoice ASAP'
+        });
+
+        const auth = getAuth();
+        signInWithPopup(auth, provider)
+            .then(result => {
+                this.SaveSession(result);
+            })
+            .catch(console.error)
+    },
+    LoginWithFacebook() {
+        const provider = new FacebookAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account',
+            title: 'Invoice ASAP'
         });
 
         const auth = getAuth();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleLoginButton, MicrosoftLoginButton } from 'react-social-login-buttons';
+import { FacebookLoginButton, GoogleLoginButton, MicrosoftLoginButton } from 'react-social-login-buttons';
 import { AuthService } from '../../../services/auth.service';
 import './Login.scss';
 
@@ -12,7 +12,9 @@ const Login: React.FC = () => {
 
         <GoogleLoginButton onClick={() => AuthService.LoginWithGoogle()} style={{ marginBottom: '1.2em' }} />
 
-        <MicrosoftLoginButton onClick={() => AuthService.LoginWithMicrosoft()} />
+        <MicrosoftLoginButton onClick={() => AuthService.LoginWithMicrosoft()} style={{ marginBottom: '1.2em' }} />
+
+        <FacebookLoginButton onClick={() => AuthService.LoginWithFacebook()} />
       </div>
     </div>
   )
