@@ -27,7 +27,8 @@ const Toolbar: React.FC = () => {
       marginBottom={15}
       paddingY={15}
       paddingX={10}
-      elevation={1}>
+      elevation={1}
+      zIndex={1}>
       <Pane
         display="flex"
         flexFlow="row"

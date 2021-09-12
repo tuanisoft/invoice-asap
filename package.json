@@ -28,19 +28,21 @@
   },
   "types": "src/index.d.ts",
   "dependencies": {
+    "class-validator": "^0.13.1",
     "evergreen-ui": "^6.4.0",
     "firebase": "^9.0.1",
-    "fireorm": "^0.22.1",
     "i18next": "^20.6.0",
     "initialism": "^1.0.4",
+    "origin-storage": "^1.1.0",
     "react": "^17.0.2",
+    "react-cross-localstorage": "^0.8.2",
     "react-dom": "^17.0.2",
     "react-i18next": "^11.11.4",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-social-login-buttons": "^3.5.1",
     "react-transition-group": "^4.4.2",
-    "reflect-metadata": "^0.1.13",
+    "typesaurus": "^7.2.0",
     "web-vitals": "^1.0.1"
   },
   "devDependencies": {
