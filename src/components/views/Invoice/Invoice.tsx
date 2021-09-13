@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ArrowLeftIcon, Button, FormField, Heading, Label, Text, Textarea, TextInput, TrashIcon } from 'evergreen-ui';
+import { AddIcon, ArrowLeftIcon, Button, FormField, Heading, Label, RemoveIcon, Text, Textarea, TextInput, TrashIcon } from 'evergreen-ui';
 import VBox from '../../helpers/VBox';
 import HBox from '../../helpers/HBox';
 import './Invoice.scss';
@@ -20,7 +20,7 @@ const Invoice: FC = () => {
         New Invoice
       </Heading>
 
-      <VBox border borderRadius={5} padding={20}>
+      <VBox border borderRadius={5} padding={20} marginBottom={20}>
         <HBox justifyContent="space-between" alignItems="start" marginBottom={10}>
           <VBox alignItems="start">
             <img src="https://via.placeholder.com/200x130.png?text=Your+Company+Logo" alt="YOUR LOGO" style={{ maxWidth: 200, maxHeight: 130, width: '100%', height: '100%' }} />
@@ -76,8 +76,8 @@ const Invoice: FC = () => {
           </VBox>
         </HBox>
 
-        <HBox marginBottom={10}>
-          <table className="xtable">
+        <VBox alignItems="start" marginBottom={15}>
+          <table className="xtable" style={{ marginBottom: 5 }}>
             <thead>
               <tr>
                 <th>Item</th>
@@ -86,8 +86,58 @@ const Invoice: FC = () => {
                 <th>Amount</th>
               </tr>
             </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                  <HBox>
+                    <Button appearance="primary" intent="danger" paddingX={0} title="Remove Item"
+                      borderTopRightRadius={0} borderBottomRightRadius={0}>
+                      <TrashIcon />
+                    </Button>
+                    <TextInput width="100%" placeholder="Item" borderTopLeftRadius={0}
+                      borderBottomLeftRadius={0} />
+                  </HBox>
+                </td>
+                <td>
+                  <TextInput width="100%" placeholder="Quantity" textAlign="center" />
+                </td>
+                <td>
+                  <TextInput width="100%" placeholder="Rate" textAlign="center" />
+                </td>
+                <td>
+                  <TextInput width="100%" placeholder="Amount" textAlign="right" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <HBox>
+                    <Button appearance="primary" intent="danger" paddingX={0} title="Remove Item"
+                      borderTopRightRadius={0} borderBottomRightRadius={0}>
+                      <TrashIcon />
+                    </Button>
+                    <TextInput width="100%" placeholder="Item" borderTopLeftRadius={0}
+                      borderBottomLeftRadius={0} />
+                  </HBox>
+                </td>
+                <td>
+                  <TextInput width="100%" placeholder="Quantity" textAlign="center" />
+                </td>
+                <td>
+                  <TextInput width="100%" placeholder="Rate" textAlign="center" />
+                </td>
+                <td>
+                  <TextInput width="100%" placeholder="Amount" textAlign="right" />
+                </td>
+              </tr>
+            </tbody>
           </table>
-        </HBox>
+
+          <Button appearance="primary" intent="success">
+            <AddIcon marginRight={5} />
+            Add Item
+          </Button>
+        </VBox>
 
         <HBox justifyContent="space-between" alignItems="start" marginBottom={10}>
           <VBox alignContent="start" justifyContent="start">
@@ -107,24 +157,24 @@ const Invoice: FC = () => {
             </HBox>
 
             <HBox justifyContent="end" marginBottom={10}>
-              <Button marginRight={16} appearance="minimal" intent="danger" title="Remove Discount">
-                <TrashIcon />
+              <Button marginRight={16} appearance="minimal" intent="danger" paddingX={0} title="Remove Discount">
+                <RemoveIcon />
               </Button>
               <Label width="100%" maxWidth={60} textAlign="right">Discount</Label>
               <TextInput type="number" marginLeft={10} width="100%" maxWidth={150} />
             </HBox>
 
             <HBox justifyContent="end" marginBottom={10}>
-              <Button marginRight={16} appearance="minimal" intent="danger" title="Remove Discount">
-                <TrashIcon />
+              <Button marginRight={16} appearance="minimal" intent="danger" paddingX={0} title="Remove Discount">
+                <RemoveIcon />
               </Button>
               <Label width="100%" maxWidth={60} textAlign="right">Tax</Label>
               <TextInput type="number" marginLeft={10} width="100%" maxWidth={150} />
             </HBox>
 
             <HBox justifyContent="end" marginBottom={10}>
-              <Button marginRight={16} appearance="minimal" intent="danger" title="Remove Discount">
-                <TrashIcon />
+              <Button marginRight={16} appearance="minimal" intent="danger" paddingX={0} title="Remove Discount">
+                <RemoveIcon />
               </Button>
               <Label width="100%" maxWidth={60} textAlign="right">Shipping</Label>
               <TextInput type="number" marginLeft={10} width="100%" maxWidth={150} />

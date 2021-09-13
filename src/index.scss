@@ -29,3 +29,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.xtable {
+  width: 100%;
+
+  thead {
+    background-color: #252E38;
+    color           : #fff;
+    font-weight     : normal;
+    font-size       : 14px;
+
+    th {
+      border : none;
+      padding: 5px;
+      width  : 15%;
+
+      &:first-child {
+        width                    : 55%;
+        text-align               : left;
+        border-top-left-radius   : 5px;
+        border-bottom-left-radius: 5px;
+      }
+
+      &:last-child {
+        text-align                : right;
+        border-top-right-radius   : 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+  }
+}
