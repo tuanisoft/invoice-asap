@@ -1,6 +1,5 @@
 import React, { memo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Link as RouterLink } from 'react-router-dom';
+import { useHistory, Link as RouterLink } from 'react-router-dom';
 import { AuthService } from '../../../services/auth.service';
 
 import {
@@ -42,7 +41,7 @@ const Toolbar: React.FC = () => {
           justifyContent="flex-start"
           alignItems="center">
           <VBox marginRight={17}>
-            <Link is={RouterLink} to="/dashobard" color={path.startsWith("/dashboard") ? undefined : 'neutral'}>
+            <Link is={RouterLink} to="/dashobard" color={(path.startsWith("/dashboard") || path.startsWith("/invoice")) ? undefined : 'neutral'}>
               Dashboard
             </Link>
           </VBox>

@@ -10,6 +10,7 @@ const VBox: React.FC<PaneProps> = (props) => {
             flexWrap="nowrap"
             alignItems="center"
             justifyContent="center"
+            width="100%"
             {...props}
         >
             {children}

@@ -1,10 +1,13 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import './Dashboard.scss';
-// import { OriginStorageClient } from 'origin-storage';
+import { onSnapshot } from 'firebase/firestore';
+
 import BreadCrum from './BreadCrum';
 import FileCard from './FileCard';
+import { IFile } from '../../../models/files.model';
 import { FilesService } from '../../../services/files.service';
-import { onSnapshot, QuerySnapshot, DocumentData } from 'firebase/firestore';
+import { AuthService } from '../../../services/auth.service';
 
 // EVERGREEN COMPONENTS
 import {
@@ -16,18 +19,19 @@ import {
   TextInputField,
   toaster
 } from 'evergreen-ui';
-import { IFile } from '../../../models/files.model';
-import { AuthService } from '../../../services/auth.service';
 
 const Dashboard: FC = () => {
-  const [folders, setFolders] = useState<QuerySnapshot<DocumentData>>();
+  const [files, setFiles] = useState<IFile[]>([]);
   const [openNewFolderDialog, setOpenNewFolderDialog] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');
 
   useEffect(() => {
     const fetchFolders = onSnapshot(FilesService.getMyFolders(), {
       next: snapshot => {
-        setFolders(snapshot);
+        setFiles(snapshot.docs.map(doc => {
+          const data = doc.data();
+          return data as IFile;
+        }));
       },
       error: err => {
         console.log(err);
@@ -76,7 +80,8 @@ const Dashboard: FC = () => {
           New Folder
         </Button>
 
-        <Button marginLeft={10} size="small" appearance="primary" intent="success" iconBefore={AddToArtifactIcon}>
+        <Button marginLeft={10} size="small" appearance="primary" intent="success" iconBefore={AddToArtifactIcon}
+          is={RouterLink} to="/invoice/new">
           Add Invoice
         </Button>
       </Heading>
@@ -85,8 +90,7 @@ const Dashboard: FC = () => {
 
       <div className="invoices-pane">
         {
-          folders?.docs.map((folder, index) => {
-            const item = folder.data() as IFile;
+          files.map((item, index) => {
             return (
               <FileCard key={index} folder={item} />
             );
@@ -103,7 +107,6 @@ const Dashboard: FC = () => {
       >
         <TextInputField label="Folder Name" name="newFolderName" onChange={handleTextChange} placeholder="My Own Folder Name" />
       </Dialog>
-
     </div>
   )
 };
