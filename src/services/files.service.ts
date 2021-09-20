@@ -1,4 +1,6 @@
-import { addDoc, query, where, orderBy } from 'firebase/firestore';
+import {
+    addDoc, query, where, orderBy, deleteDoc, doc
+} from 'firebase/firestore';
 import { AuthService } from "../services/auth.service";
 import { IFile, FilesCollection } from '../models/files.model';
 
@@ -11,5 +13,8 @@ export const FilesService = {
     },
     getMyFolders() {
         return query(FilesCollection, where('owner', '==', uid), orderBy('name', 'asc'));
+    },
+    delete(itemId: string) {
+        return deleteDoc(doc(FilesCollection, itemId));
     }
 };

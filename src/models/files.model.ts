@@ -3,6 +3,7 @@ import { db } from "../fire.instance";
 // import { AuthService } from "../services/auth.service";
 
 export interface IFile {
+    id?: string;
     parent: string;
     type: "invoice" | "folder";
     name: string;

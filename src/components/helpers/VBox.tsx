@@ -6,6 +6,7 @@ const VBox: React.FC<PaneProps> = (props) => {
     return (
         <Pane
             display="flex"
+            position="relative"
             flexDirection="column"
             flexWrap="nowrap"
             alignItems="center"
