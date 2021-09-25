@@ -1,5 +1,6 @@
 import {
-    addDoc, query, where, orderBy, deleteDoc, doc
+    doc, query, where, orderBy,
+    addDoc, deleteDoc, updateDoc
 } from 'firebase/firestore';
 import { AuthService } from "../services/auth.service";
 import { IFile, FilesCollection } from '../models/files.model';
@@ -16,5 +17,8 @@ export const FilesService = {
     },
     delete(itemId: string) {
         return deleteDoc(doc(FilesCollection, itemId));
+    },
+    renameItem(itemId: string, newName: string) {
+        return updateDoc(doc(FilesCollection, itemId), { name: newName });
     }
 };

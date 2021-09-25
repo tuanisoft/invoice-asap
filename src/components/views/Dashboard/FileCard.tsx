@@ -17,10 +17,13 @@ type FileCardProps = {
     file: IFile;
     onContextMenu?: MouseEventHandler<HTMLElement> | undefined;
     onDelete?: (params: { id: string, fileName: string }) => void;
+    onRename?: (params: { id: string, currentFileName: string }) => void;
 };
 
 const FileCard: FC<FileCardProps> = (props) => {
-    const { file, onContextMenu, onDelete } = props;
+    const { file, onContextMenu, onRename, onDelete } = props;
+
+    const handleRename = () => onRename && typeof onRename === "function" && onRename({ id: file.id || "nothing", currentFileName: file.name });
 
     const handleDelete = () => onDelete && typeof onDelete === "function" && onDelete({ id: file.id || "nothing", fileName: file.name });
 
@@ -50,7 +53,7 @@ const FileCard: FC<FileCardProps> = (props) => {
                             <Menu.Group>
                                 <Menu.Item onClick={() => { close(); }}>Share...</Menu.Item>
                                 <Menu.Item onClick={() => { close(); }}>Move...</Menu.Item>
-                                <Menu.Item onClick={() => { close(); }}>Rename</Menu.Item>
+                                <Menu.Item onClick={() => { close(); handleRename(); }}>Rename</Menu.Item>
                             </Menu.Group>
                             <Menu.Divider />
                             <Menu.Group>

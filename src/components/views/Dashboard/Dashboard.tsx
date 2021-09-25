@@ -35,6 +35,9 @@ const Dashboard: FC = () => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [deleteFile, setDeleteFile] = useState<{ id: string, fileName: string }>({ id: '', fileName: '' });
 
+  const [openRenameDialog, setOpenRenameDialog] = useState(false);
+  const [renameFile, setRenameFile] = useState<{ id: string, newFileName: string }>({ id: '', newFileName: '' });
+
   useEffect(() => {
     const fetchFolders = onSnapshot(FilesService.getMyFolders(), {
       next: snapshot => {
@@ -75,12 +78,29 @@ const Dashboard: FC = () => {
     });
   };
 
+  const handleOpenRenameDialog = (params: { id: string, currentFileName: string }) => {
+    setOpenRenameDialog(true);
+    console.log(params);
+    setRenameFile({ id: params.id, newFileName: params.currentFileName });
+  };
+  const handleRenameFile = (close: () => void) => {
+    close();
+    FilesService.renameItem(renameFile.id, renameFile.newFileName).then(() => {
+      toaster.success(`File ${renameFile.newFileName} renamed`, { duration: 3, hasCloseButton: false });
+    }).catch(() => {
+      toaster.danger('File rename failed', { duration: 3, hasCloseButton: false });
+    });
+  };
+  const handleTextChangeNewName = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setRenameFile({ ...renameFile, newFileName: value });
+  };
+
   const handleOpenDeleteDialog = (params: { id: string, fileName: string }) => {
     console.log(params);
     setOpenDeleteDialog(true);
     setDeleteFile(params);
   };
-
   const handleDeleteFile = (close: () => void) => {
     close();
     FilesService.delete(deleteFile.id).then(() => {
@@ -96,7 +116,6 @@ const Dashboard: FC = () => {
       setNewFolderName(value);
     }
   };
-
 
   const handleContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
@@ -160,6 +179,7 @@ const Dashboard: FC = () => {
                 file={item}
                 key={index}
                 onContextMenu={handleContextMenuItem}
+                onRename={handleOpenRenameDialog}
                 onDelete={handleOpenDeleteDialog} />
             );
           })
@@ -174,6 +194,17 @@ const Dashboard: FC = () => {
         confirmLabel="Create"
       >
         <TextInputField label="Folder Name" name="newFolderName" onChange={handleTextChange} placeholder="My Own Folder Name" />
+      </Dialog>
+
+      <Dialog
+        isShown={openRenameDialog}
+        title="Rename a file"
+        intent="danger"
+        onCloseComplete={() => setOpenRenameDialog(false)}
+        onConfirm={handleRenameFile}
+        confirmLabel="Rename"
+      >
+        <TextInputField label="New Folder Name" name="newName" onChange={handleTextChangeNewName} value={renameFile.newFileName} placeholder="A New Folder Name" />
       </Dialog>
 
       <Dialog
