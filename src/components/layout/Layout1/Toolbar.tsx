@@ -3,17 +3,23 @@ import { useHistory, Link as RouterLink } from 'react-router-dom';
 import { AuthService } from '../../../services/auth.service';
 
 import {
-  Button, Pane, Link
+  Button, Pane, Link, Dialog
 } from 'evergreen-ui';
 import VBox from '../../helpers/VBox';
 
 const Toolbar: React.FC = () => {
   const history = useHistory();
   const [path, setPath] = useState(history.location.pathname);
+  const [isOpenLogout, setIsOpenLogout] = useState(false);
 
   history.listen(() => {
     setPath(history.location.pathname);
   });
+
+  const handleLogout = (close: () => void) => {
+    close();
+    AuthService.Logout();
+  };
 
   return (
     <Pane
@@ -53,9 +59,20 @@ const Toolbar: React.FC = () => {
           </VBox>
         </Pane>
 
-        <Button appearance="primary" onClick={() => AuthService.Logout()}>Logout</Button>
+        <Button appearance="primary" onClick={() => setIsOpenLogout(true)}>Logout</Button>
       </Pane>
-    </Pane >
+
+      <Dialog
+        isShown={isOpenLogout}
+        title="Invoice ASAP"
+        intent="warning"
+        onCloseComplete={() => setIsOpenLogout(false)}
+        onConfirm={handleLogout}
+        confirmLabel="Logout"
+      >
+        {`Are you sure do you want to logout?`}
+      </Dialog>
+    </Pane>
   );
 };
 

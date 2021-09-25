@@ -61,7 +61,6 @@ const Dashboard: FC = () => {
     setNewFolderName('');
     setOpenNewFolderDialog(true);
   };
-
   const handleCreateNewFolder = (close: () => void) => {
     const folder: IFile = {
       name: newFolderName,
@@ -80,7 +79,6 @@ const Dashboard: FC = () => {
 
   const handleOpenRenameDialog = (params: { id: string, currentFileName: string }) => {
     setOpenRenameDialog(true);
-    console.log(params);
     setRenameFile({ id: params.id, newFileName: params.currentFileName });
   };
   const handleRenameFile = (close: () => void) => {
@@ -97,7 +95,6 @@ const Dashboard: FC = () => {
   };
 
   const handleOpenDeleteDialog = (params: { id: string, fileName: string }) => {
-    console.log(params);
     setOpenDeleteDialog(true);
     setDeleteFile(params);
   };
@@ -193,7 +190,7 @@ const Dashboard: FC = () => {
         onCloseComplete={() => setOpenNewFolderDialog(false)}
         confirmLabel="Create"
       >
-        <TextInputField label="Folder Name" name="newFolderName" onChange={handleTextChange} placeholder="My Own Folder Name" />
+        <TextInputField label="Folder Name" name="newFolderName" onChange={handleTextChange} value={newFolderName} placeholder="My Own Folder Name" />
       </Dialog>
 
       <Dialog
