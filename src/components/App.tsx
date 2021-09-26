@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { AuthService } from '../services/auth.service';
 import Layout1 from './layout/Layout1/Layout1';
 import ThemeLoader from './layout/Layout1/ThemeLoader';
+import Loader from './layout/Loader/Loader';
 import Routes from './layout/Routes';
 
 const App: React.FC = () => {
@@ -9,15 +10,20 @@ const App: React.FC = () => {
 
   if (isLogged) {
     return (
-      <Layout1>
+      <Suspense fallback={<Loader />}>
         <ThemeLoader />
-        <Routes />
-      </Layout1>
+
+        <Layout1>
+          <Routes />
+        </Layout1>
+      </Suspense>
     );
   }
 
   return (
-    <Routes />
+    <Suspense fallback={<Loader />}>
+      <Routes />
+    </Suspense>
   );
 }
 

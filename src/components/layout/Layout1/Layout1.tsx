@@ -1,9 +1,22 @@
+import { FC, useEffect, useState } from 'react';
 import { Pane } from 'evergreen-ui';
-import React from 'react';
 import Toolbar from './Toolbar';
 import './Layout1.scss';
+import Loader from '../Loader/Loader';
 
-const Layout1: React.FC = ({ children }) => {
+const Layout1: FC = ({ children }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 3000);
+  }, []);
+
+  if (!loaded) {
+    return <Loader />;
+  }
+
   return (
     <div className="Layout1">
       <Toolbar />

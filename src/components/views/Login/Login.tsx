@@ -1,3 +1,4 @@
+import { Heading } from 'evergreen-ui';
 import React from 'react';
 import { FacebookLoginButton, GoogleLoginButton, MicrosoftLoginButton } from 'react-social-login-buttons';
 import { AuthService } from '../../../services/auth.service';
@@ -7,8 +8,9 @@ const Login: React.FC = () => {
   return (
     <div className="Login">
       <div className="loginPane">
-        <h1 style={{ marginTop: 0 }}>INVOICE ASAP</h1>
-        <h3>Inicia Sesión</h3>
+        <img src="./img/receipt-128.png" alt="Invoice ASAP" className="logo" />
+        <Heading is="h1" size={900} marginBottom={10}>INVOICE ASAP</Heading>
+        <Heading is="h3" size={800} marginBottom={10}>Inicia Sesión</Heading>
 
         <GoogleLoginButton onClick={() => AuthService.LoginWithGoogle()} style={{ marginBottom: '1.2em' }} />
 

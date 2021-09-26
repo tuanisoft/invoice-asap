@@ -1,3 +1,4 @@
+import { toaster } from 'evergreen-ui';
 import {
     GoogleAuthProvider,
     FacebookAuthProvider,
@@ -16,6 +17,12 @@ interface ISession {
     photo: string | undefined;
 }
 
+function showErrors(error: any) {
+    if (error.code === 'auth/account-exists-with-different-credential') {
+        toaster.danger('You have already signed up with a different auth provider for that email.', { duration: 5, hasCloseButton: false });
+    }
+}
+
 export const AuthService = {
     IsLoggedIn: () => {
         const locaUser = localStorage.getItem(sesVar);
@@ -27,7 +34,6 @@ export const AuthService = {
     },
     Logout() {
         auth.signOut().then(() => {
-            // localStorage.clear();
             localStorage.removeItem(sesVar);
             window.location.reload();
         });
@@ -43,33 +49,39 @@ export const AuthService = {
             .then((result) => {
                 this.SaveSession(result);
             })
-            .catch(console.error)
+            .catch(error => {
+                showErrors(error);
+            });
     },
     LoginWithMicrosoft() {
         const provider = new OAuthProvider('microsoft.com');
         provider.setCustomParameters({
-            prompt: 'select_account',
-            title: 'Invoice ASAP'
+            prompt: 'select_account'
         });
 
         signInWithPopup(auth, provider)
             .then(result => {
                 this.SaveSession(result);
             })
-            .catch(console.error)
+            .catch(error => {
+                showErrors(error);
+            });
     },
     LoginWithFacebook() {
         const provider = new FacebookAuthProvider();
         provider.setCustomParameters({
-            prompt: 'select_account',
-            title: 'Invoice ASAP'
+            display: 'popup'
         });
+        provider.addScope('public_profile');
+        provider.addScope('email');
 
         signInWithPopup(auth, provider)
             .then(result => {
                 this.SaveSession(result);
             })
-            .catch(console.error)
+            .catch(error => {
+                showErrors(error);
+            });
     },
     SaveSession(result: UserCredential) {
         localStorage.setItem(sesVar, JSON.stringify({
