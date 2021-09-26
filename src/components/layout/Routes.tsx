@@ -1,17 +1,24 @@
-import React, { lazy } from "react";
+import { FC } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { AuthService } from "../../services/auth.service";
 
-const Routes: React.FC = () => {
+// Components
+import Login from "../views/Login/Login";
+import Dashboard from "../views/Dashboard/Dashboard";
+import Invoice from "../views/Invoice/Invoice";
+import Profile from "../views/Profile/Profile";
+
+
+const Routes: FC = () => {
     const isLogged = AuthService.IsLoggedIn();
 
     if (isLogged) {
         return (
             <Switch>
-                <Route exact path="/dashboard" component={lazy(() => import("../views/Dashboard/Dashboard"))} />
-                <Route exact path="/invoice/new" component={lazy(() => import("../views/Invoice/Invoice"))} />
-                <Route exact path="/invoice/:invoiceId" component={lazy(() => import("../views/Invoice/Invoice"))} />
-                <Route exact path="/profile" component={lazy(() => import("../views/Profile/Profile"))} />
+                <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/invoice/new" component={Invoice} />
+                <Route exact path="/invoice/:invoiceId" component={Invoice} />
+                <Route exact path="/profile" component={Profile} />
                 <Redirect to="/dashboard" from="*" />
             </Switch>
         );
@@ -19,7 +26,7 @@ const Routes: React.FC = () => {
 
     return (
         <Switch>
-            <Route exact path="/login" component={lazy(() => import("../views/Login/Login"))} />
+            <Route exact path="/login" component={Login} />
             <Redirect to="/login" from="*" />
         </Switch>
     );
