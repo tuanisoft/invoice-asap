@@ -12,8 +12,6 @@ import {
     Popover,
     Text
 } from "evergreen-ui";
-import { useRecoilValue } from "recoil";
-import { themeState } from "../../recoil/theme";
 
 type FileCardProps = {
     file: IFile;
@@ -24,7 +22,6 @@ type FileCardProps = {
 
 const FileCard: FC<FileCardProps> = (props) => {
     const { file, onContextMenu, onRename, onDelete } = props;
-    const theme = useRecoilValue(themeState);
 
     const handleRename = () => onRename && typeof onRename === "function" && onRename({ id: file.id || "nothing", currentFileName: file.name });
 
@@ -47,8 +44,7 @@ const FileCard: FC<FileCardProps> = (props) => {
         <VBox border
             borderRadius={10}
             padding={20}
-            cursor="pointer"
-            onContextMenu={onContextMenu}>
+            cursor="pointer">
             <Pane position="absolute" top={5} left={5} >
                 <Popover
                     content={({ close }) => (
@@ -65,13 +61,13 @@ const FileCard: FC<FileCardProps> = (props) => {
                         </Menu>
                     )}
                 >
-                    <Button appearance="minimal" padding={0} background={theme.colors.main}>
+                    <Button appearance="minimal" padding={0}>
                         <MoreIcon style={{ transform: "rotate(90deg)" }} size={24} />
                     </Button>
                 </Popover>
             </Pane>
             <FolderCloseIcon size={100} color="orange500" />
-            <Text color={theme.colors.textSecondary}>{file.name}</Text>
+            <Text>{file.name}</Text>
         </VBox>
     );
 }

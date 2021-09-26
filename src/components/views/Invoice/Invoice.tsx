@@ -11,7 +11,7 @@ const Invoice: FC = () => {
   return (
     <div className="Invoice">
       <Heading size={800} marginBottom={20}>
-        <Button appearance="minimal" onClick={() => history.goBack()} size="large">
+        <Button appearance="minimal" onClick={() => history.goBack()} size="large" paddingX={5} marginRight={10}>
           <HBox>
             <ArrowLeftIcon marginRight={5} />
             Back

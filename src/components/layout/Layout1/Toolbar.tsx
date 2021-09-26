@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import { useHistory, Link as RouterLink } from 'react-router-dom';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { themeSelectorState, themeState } from '../../recoil/theme';
+import { useRecoilState } from 'recoil';
+import { themeSelectorState } from '../../recoil/theme';
 
 import { AuthService } from '../../../services/auth.service';
 import VBox from '../../helpers/VBox';
@@ -9,7 +9,7 @@ import HBox from '../../helpers/HBox';
 
 import {
   MoonIcon, ContrastIcon,
-  Button, Pane, Link, Dialog, Switch
+  Button, Pane, Link, Dialog, Switch, Text
 } from 'evergreen-ui';
 
 const Toolbar: React.FC = () => {
@@ -17,7 +17,6 @@ const Toolbar: React.FC = () => {
   const [path, setPath] = useState(history.location.pathname);
   const [isOpenLogout, setIsOpenLogout] = useState(false);
 
-  const theme = useRecoilValue(themeState);
   const [themeKind, setThemeKind] = useRecoilState(themeSelectorState);
   const [darkMode, setDarkMode] = useState(themeKind === 'dark');
 
@@ -38,9 +37,9 @@ const Toolbar: React.FC = () => {
 
   return (
     <Pane
+      className="toolbar"
       display="flex"
       position="sticky"
-      backgroundColor={theme.colors.toolbar}
       top={0}
       flexFlow="row"
       justifyContent="center"
@@ -80,7 +79,7 @@ const Toolbar: React.FC = () => {
               checked={darkMode}
               onChange={handleThemeChange}
               backgroundColor="orange500" />
-            {(darkMode === true) && <MoonIcon size={20} color="white" />}
+            {(darkMode === true) && <MoonIcon size={20} color="gray500" />}
             {(darkMode === false) && <ContrastIcon size={20} color="orange500" />}
           </HBox>
         </Pane>
@@ -98,7 +97,9 @@ const Toolbar: React.FC = () => {
         onConfirm={handleLogout}
         confirmLabel="Logout"
       >
-        {`Are you sure do you want to logout?`}
+        <Text>
+          {`Are you sure do you want to logout?`}
+        </Text>
       </Dialog>
     </Pane>
   );

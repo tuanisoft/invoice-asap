@@ -1,42 +1,140 @@
 import { atom, selector } from "recoil";
+import { Colors, defaultTheme as ThemeDefaultEvergreen, Theme } from "evergreen-ui";
 
 type ThemeKind = "light" | "dark";
 
-type Theme = {
-    type: "light" | "dark";
-    colors: {
-        toolbar: string;
-        main: string;
-        body: string;
-        text?: string;
-        textPrimary?: string;
-        textSecondary?: string;
+type CustomTheme = Theme & {
+    customComponents: {
+        body: {
+            backgroundColor: Colors
+        },
+        toolbar: {
+            color: Colors
+        }
     }
-}
+};
 
 type ThemeList = {
-    [key in ThemeKind]: Theme;
+    [key in ThemeKind]: CustomTheme;
 }
 
+const defaultTheme = ThemeDefaultEvergreen as any;
+console.log(defaultTheme);
 const Themes: ThemeList = {
     light: {
-        type: 'light',
-        colors: {
-            main: '#FAFBFF',
-            toolbar: '#FAFBFF',
-            body: '#FFF',
-            textSecondary: 'gray'
-        }
+        ...defaultTheme
     },
     dark: {
-        type: 'dark',
-        colors: {
-            main: '#2F3847',
-            toolbar: '#2F3847',
-            body: '#3C4555',
-            text: 'white',
-            textPrimary: 'blue300',
-            textSecondary: 'gray400'
+        ...defaultTheme,
+        customComponents: {
+            body: {
+                backgroundColor: "#3C4555"
+            },
+            toolbar: {
+                backgroundColor: "#2F3847"
+            }
+        },
+        components: {
+            ...defaultTheme.components,
+            Dialog: {
+                ...defaultTheme.components.Dialog,
+                baseStyle: {
+                    backgroundColor: "#2F3847",
+                }
+            },
+            Heading: {
+                ...defaultTheme.components.Heading,
+                baseStyle: {
+                    ...defaultTheme.components.Heading.baseStyle,
+                    color: "#fff",
+                },
+            },
+            Text: {
+                ...defaultTheme.components.Text,
+                baseStyle: {
+                    ...defaultTheme.components.Text.baseStyle,
+                    color: "white",
+                }
+            },
+            Label: {
+                ...defaultTheme.components.Label,
+                baseStyle: {
+                    ...defaultTheme.components.Label.baseStyle,
+                    color: "white",
+                }
+            },
+            Link: {
+                ...defaultTheme.components.Link,
+                baseStyle: {
+                    ...defaultTheme.components.Link.baseStyle,
+                    color: "gray300",
+                    _hover: {
+                        color: "#fff",
+                    }
+                }
+            },
+            Button: {
+                ...defaultTheme.components.Button,
+                appearances: {
+                    ...defaultTheme.components.Button.appearances,
+                    minimal: {
+                        backgroundColor: "transparent",
+                        color: "white",
+                        _hover: {
+                            backgroundColor: "#2F3847",
+                            color: "white",
+                        },
+                        _active: {
+                            backgroundColor: "#2F3847",
+                            color: "white",
+                        }
+                    }
+                }
+            },
+            MenuItem: {
+                ...defaultTheme.components.MenuItem,
+                appearances: {
+                    ...defaultTheme.components.MenuItem.appearances,
+                    default: {
+                        ...defaultTheme.components.MenuItem.appearances.default,
+                        backgroundColor: "#2F3847",
+                        color: "white",
+                        _hover: {
+                            backgroundColor: "#3C4555",
+                            color: "white",
+                        },
+                        _active: {
+                            backgroundColor: "#3C4555",
+                        },
+                        _focus: {
+                            backgroundColor: "#3C4555",
+                            color: "white"
+                        },
+                    }
+                },
+                // baseStyle: {
+                //     ...defaultTheme.components.MenuItem.baseStyle,
+                // }
+            }
+            // Button: {
+            //     ...defaultTheme.components.Button,
+            //     baseStyle: {
+            //         color: 'white',
+            //         paddingX: 12,
+            //         paddingY: 8,
+            //         borderRadius: 5,
+            //         backgroundColor: 'indianred',
+            //         _hover: {
+            //             backgroundColor: 'black',
+            //         },
+            //         _active: {
+            //             backgroundColor: 'darkred',
+            //         },
+            //         _focus: {
+            //             boxShadow: '0 0 0 2px lightcoral',
+            //         },
+            //     },
+            // }
         }
     }
 };

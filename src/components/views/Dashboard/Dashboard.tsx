@@ -20,15 +20,13 @@ import {
   Menu,
   Pane,
   Portal,
+  Text,
   TextInputField,
   toaster,
   TrashIcon
 } from 'evergreen-ui';
-import { useRecoilValue } from 'recoil';
-import { themeState } from '../../recoil/theme';
 
 const Dashboard: FC = () => {
-  const theme = useRecoilValue(themeState);
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   const [files, setFiles] = useState<IFile[]>([]);
 
@@ -117,10 +115,10 @@ const Dashboard: FC = () => {
     }
   };
 
-  const handleContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    e.preventDefault();
-    setAnchorPoint({ x: e.clientX, y: e.clientY });
-  };
+  // const handleContextMenu = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  //   e.preventDefault();
+  //   setAnchorPoint({ x: e.clientX, y: e.clientY });
+  // };
   const handleContextMenuItem = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     setAnchorPoint({ x: e.clientX, y: e.clientY });
@@ -128,7 +126,7 @@ const Dashboard: FC = () => {
 
   return (
     <div className="Dashboard">
-      <Heading size={800} color={theme.colors.text}>
+      <Heading size={800}>
         Dashboard
         <Button marginLeft={10} size="small" appearance="primary" intent="warning" iconBefore={FolderNewIcon}
           onClick={handleOpenCreateNewFolderDialog}>
@@ -171,7 +169,7 @@ const Dashboard: FC = () => {
         </Pane>
       </Portal>
 
-      <div className="invoices-pane" onContextMenu={handleContextMenu}>
+      <div className="invoices-pane">
         {
           files.map((item, index) => {
             return (
@@ -215,7 +213,9 @@ const Dashboard: FC = () => {
         onConfirm={handleDeleteFile}
         confirmLabel="Delete"
       >
-        {`Are you sure you want to delete ${deleteFile.fileName}?`}
+        <Text>
+          {`Are you sure you want to delete ${deleteFile.fileName}?`}
+        </Text>
       </Dialog>
     </div >
   )
