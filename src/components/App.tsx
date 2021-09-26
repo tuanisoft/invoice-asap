@@ -1,6 +1,7 @@
 import React from 'react';
 import { AuthService } from '../services/auth.service';
 import Layout1 from './layout/Layout1/Layout1';
+import ThemeLoader from './layout/Layout1/ThemeLoader';
 import Routes from './layout/Routes';
 
 const App: React.FC = () => {
@@ -9,6 +10,7 @@ const App: React.FC = () => {
   if (isLogged) {
     return (
       <Layout1>
+        <ThemeLoader />
         <Routes />
       </Layout1>
     );

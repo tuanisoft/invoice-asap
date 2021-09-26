@@ -24,8 +24,11 @@ import {
   toaster,
   TrashIcon
 } from 'evergreen-ui';
+import { useRecoilValue } from 'recoil';
+import { themeState } from '../../recoil/theme';
 
 const Dashboard: FC = () => {
+  const theme = useRecoilValue(themeState);
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   const [files, setFiles] = useState<IFile[]>([]);
 
@@ -125,7 +128,7 @@ const Dashboard: FC = () => {
 
   return (
     <div className="Dashboard">
-      <Heading size={800}>
+      <Heading size={800} color={theme.colors.text}>
         Dashboard
         <Button marginLeft={10} size="small" appearance="primary" intent="warning" iconBefore={FolderNewIcon}
           onClick={handleOpenCreateNewFolderDialog}>

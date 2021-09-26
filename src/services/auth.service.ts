@@ -27,7 +27,8 @@ export const AuthService = {
     },
     Logout() {
         auth.signOut().then(() => {
-            localStorage.clear();
+            // localStorage.clear();
+            localStorage.removeItem(sesVar);
             window.location.reload();
         });
     },

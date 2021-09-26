@@ -1,16 +1,25 @@
 import React, { memo, useState } from 'react';
 import { useHistory, Link as RouterLink } from 'react-router-dom';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { themeSelectorState, themeState } from '../../recoil/theme';
+
 import { AuthService } from '../../../services/auth.service';
+import VBox from '../../helpers/VBox';
+import HBox from '../../helpers/HBox';
 
 import {
-  Button, Pane, Link, Dialog
+  MoonIcon, ContrastIcon,
+  Button, Pane, Link, Dialog, Switch
 } from 'evergreen-ui';
-import VBox from '../../helpers/VBox';
 
 const Toolbar: React.FC = () => {
   const history = useHistory();
   const [path, setPath] = useState(history.location.pathname);
   const [isOpenLogout, setIsOpenLogout] = useState(false);
+
+  const theme = useRecoilValue(themeState);
+  const [themeKind, setThemeKind] = useRecoilState(themeSelectorState);
+  const [darkMode, setDarkMode] = useState(themeKind === 'dark');
 
   history.listen(() => {
     setPath(history.location.pathname);
@@ -21,10 +30,17 @@ const Toolbar: React.FC = () => {
     AuthService.Logout();
   };
 
+  const handleThemeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.checked;
+    setDarkMode(value);
+    setThemeKind(value ? 'dark' : 'light');
+  };
+
   return (
     <Pane
       display="flex"
       position="sticky"
+      backgroundColor={theme.colors.toolbar}
       top={0}
       flexFlow="row"
       justifyContent="center"
@@ -32,7 +48,7 @@ const Toolbar: React.FC = () => {
       marginBottom={15}
       paddingY={15}
       paddingX={10}
-      elevation={1}
+      boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
       zIndex={1}>
       <Pane
         display="flex"
@@ -57,9 +73,21 @@ const Toolbar: React.FC = () => {
               Profile
             </Link>
           </VBox>
+
+          <HBox justifyContent="end" alignItems="center" marginRight={15}>
+            <Switch height={20}
+              marginRight={10}
+              checked={darkMode}
+              onChange={handleThemeChange}
+              backgroundColor="orange500" />
+            {(darkMode === true) && <MoonIcon size={20} color="white" />}
+            {(darkMode === false) && <ContrastIcon size={20} color="orange500" />}
+          </HBox>
         </Pane>
 
-        <Button appearance="primary" onClick={() => setIsOpenLogout(true)}>Logout</Button>
+        <HBox justifyContent="end" alignItems="center">
+          <Button appearance="primary" onClick={() => setIsOpenLogout(true)}>Logout</Button>
+        </HBox>
       </Pane>
 
       <Dialog
