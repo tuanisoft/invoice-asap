@@ -19,7 +19,7 @@ const ThemeLoader: FC = () => {
                     }
 
                     div[role="dialog"]{
-                        background-color: ${theme.customComponents?.toolbar?.backgroundColor};
+                        background-color: ${theme.customComponents?.body?.backgroundColor};
                     }
 
                     span.ub-color_474d66{

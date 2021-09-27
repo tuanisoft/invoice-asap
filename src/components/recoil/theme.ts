@@ -73,6 +73,16 @@ const Themes: ThemeList = {
                     }
                 }
             },
+            Input: {
+                ...defaultTheme.components.Input,
+                appearances: {
+                    ...defaultTheme.components.Input.appearances,
+                    default: {
+                        backgroundColor: "#2F3847",
+                        color: "white",
+                    }
+                }
+            },
             Button: {
                 ...defaultTheme.components.Button,
                 appearances: {
@@ -120,25 +130,6 @@ const Themes: ThemeList = {
                     }
                 }
             }
-            // Button: {
-            //     ...defaultTheme.components.Button,
-            //     baseStyle: {
-            //         color: 'white',
-            //         paddingX: 12,
-            //         paddingY: 8,
-            //         borderRadius: 5,
-            //         backgroundColor: 'indianred',
-            //         _hover: {
-            //             backgroundColor: 'black',
-            //         },
-            //         _active: {
-            //             backgroundColor: 'darkred',
-            //         },
-            //         _focus: {
-            //             boxShadow: '0 0 0 2px lightcoral',
-            //         },
-            //     },
-            // }
         }
     }
 };
