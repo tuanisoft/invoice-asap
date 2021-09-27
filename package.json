@@ -2,6 +2,17 @@
   "name": "invoice-asap",
   "version": "0.1.0",
   "private": true,
+  "license": "BSD",
+  "homepage": "https://invoice-asap.web.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tuanisoft/invoice-asap"
+  },
+  "author": {
+    "name": "Walter Corrales",
+    "email": "corraleswalter@live.com",
+    "url": "https://buster95.github.io"
+  },
   "scripts": {
     "start": "react-scripts start",
     "start:https": "HTTPS=true react-scripts start",
