@@ -11,19 +11,23 @@ const ThemeLoader: FC = () => {
             <style>
                 {`
                     body {
-                        background-color: ${theme.customComponents?.body?.backgroundColor || 'inherit'};
+                        background-color: ${theme.customComponents?.body?.backgroundColor};
                     }
 
                     .toolbar {
-                        background-color: ${theme.customComponents?.toolbar?.backgroundColor || 'inherit'};
+                        background-color: ${theme.customComponents?.toolbar?.backgroundColor};
                     }
 
                     div[role="dialog"]{
                         background-color: ${theme.customComponents?.toolbar?.backgroundColor};
                     }
 
+                    span.ub-color_474d66{
+                        color: ${theme.components?.Text?.baseStyle?.color};
+                    }
+
                     span {
-                        color: ${theme.components?.Text.baseStyle?.color || 'inherit'} !important;
+                        color: ${theme.components?.Text?.baseStyle?.color};
                     }
                 `}
             </style>

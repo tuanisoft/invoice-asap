@@ -50,8 +50,8 @@ const FileCard: FC<FileCardProps> = (props) => {
                     content={({ close }) => (
                         <Menu>
                             <Menu.Group>
-                                <Menu.Item onClick={() => { close(); }}>Share...</Menu.Item>
-                                <Menu.Item onClick={() => { close(); }}>Move...</Menu.Item>
+                                {/* <Menu.Item intent="info" onClick={() => { close(); }}>Share...</Menu.Item> */}
+                                {/* <Menu.Item intent="success" onClick={() => { close(); }}>Move...</Menu.Item> */}
                                 <Menu.Item onClick={() => { close(); handleRename(); }}>Rename</Menu.Item>
                             </Menu.Group>
                             <Menu.Divider />

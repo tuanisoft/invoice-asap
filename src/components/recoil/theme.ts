@@ -93,6 +93,13 @@ const Themes: ThemeList = {
             },
             MenuItem: {
                 ...defaultTheme.components.MenuItem,
+                baseStyle: {
+                    ...defaultTheme.components.MenuItem.baseStyle,
+                    color: "white",
+                    _hover: {
+                        color: "#fff",
+                    }
+                },
                 appearances: {
                     ...defaultTheme.components.MenuItem.appearances,
                     default: {
@@ -111,10 +118,7 @@ const Themes: ThemeList = {
                             color: "white"
                         },
                     }
-                },
-                // baseStyle: {
-                //     ...defaultTheme.components.MenuItem.baseStyle,
-                // }
+                }
             }
             // Button: {
             //     ...defaultTheme.components.Button,
