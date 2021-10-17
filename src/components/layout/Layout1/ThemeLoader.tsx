@@ -22,11 +22,11 @@ const ThemeLoader: FC = () => {
                         background-color: ${theme.customComponents?.body?.backgroundColor};
                     }
 
-                    span.ub-color_474d66{
-                        color: ${theme.components?.Text?.baseStyle?.color};
+                    nav[role="menu"]{
+                        background-color: ${theme.customComponents?.toolbar?.backgroundColor};
                     }
 
-                    span {
+                    span.ub-color_474d66{
                         color: ${theme.components?.Text?.baseStyle?.color};
                     }
                 `}
